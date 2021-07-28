@@ -2,6 +2,7 @@
 /*
  * _printch - print characters to display
  * @c: char to be printed
+ *
  * Return: number of bytes
  */
 int _printch(char c)
@@ -10,6 +11,7 @@ int _printch(char c)
 }
 /**
  * _strlen - calc length of string.
+ *
  * @s: pointer to a char.
  * Return: length of string
  */
@@ -27,6 +29,7 @@ int _strlen(char *s)
 /*
  * _printstr - print characters in string
  * @str: string value to be printed
+ *
  * Return: number of bytes
  */
 int _printstr(char *str)

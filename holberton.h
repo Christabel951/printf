@@ -25,20 +25,19 @@ typedef struct flags
  * @c: format specifier
  * @f: pointer to the correct printing function
  */
- 
+
 typedef struct printHandler
 {
 	char c;
 	int (*f)(va_list ap, flags_t *f);
 } ph;
 
-
 int _printf(const char *format, ...);
 int _printch(char c);
 int _strlen(char *s);
 int _printstr(char *str);
 
-print_nums
+/*print_nums*/
 int print_int(va_list l, flags_t *f);
 void print_number(int n);
 int print_unsigned(va_list l, flags_t *f);
@@ -64,6 +63,5 @@ int print_address(va_list l, flags_t *f);
 
 /* get_flag */
 int get_flag(char s, flags_t *f);
-
 
 #endif
