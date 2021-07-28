@@ -9,7 +9,7 @@ int _printch(char c)
 	return (write(1, &c, 1));
 }
 /**
- * _strlen - swap parameter values.
+ * _strlen - calc length of string.
  * @s: pointer to a char.
  * Return: length of string
  */
@@ -31,9 +31,7 @@ int _strlen(char *s)
  */
 int _printstr(char *str)
 {
-	return (write(1, str, _strlen(str)));
-}
-int _print_percent(const char k)
-{
-	return (write(1, &k, 1));
+	if (str)
+		return (write(1, str, _strlen(str)));
+	return (-1);
 }

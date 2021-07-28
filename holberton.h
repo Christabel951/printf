@@ -5,9 +5,8 @@ int _printf(const char *format, ...);
 int _printch(char c);
 int _strlen(char *s);
 int _printstr(char *str);
-int _print_percent(const char k);
 
-/* print_nums */
+print_nums
 int print_int(va_list l, flags_t *f);
 void print_number(int n);
 int print_unsigned(va_list l, flags_t *f);
