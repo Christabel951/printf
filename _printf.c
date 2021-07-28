@@ -15,6 +15,7 @@ int _printf(const char *format, ...)
 	va_list vl;
 
 	va_start(vl, format);
+	i = 0;
 	while (format[i])
 	{
 		if (format[i] == '%')
@@ -34,6 +35,7 @@ int _printf(const char *format, ...)
 				default:
 					cc += _printch('%');
 					cc += _printch(format[i]);
+					break;
 			}
 			i++;
 		}
