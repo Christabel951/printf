@@ -5,46 +5,45 @@
  * @format: constant string value -fixed argument.
  * @...: optional argument.
  *
- * Description: handle %s, %c, % format specifiers and simple string output
+ * Description: handle output of different data types by converting them to string. Use 
+ * a given set of format specifiers[%c, %s, %%, %d] to invoke conversion of a certain data type to
+ * string and display it on the standard output stream.
  * Return: number of chars printed
  */
 int _printf(const char *format, ...)
 {
-	int i, cc = 0;
-	char *str;
-	va_list vl;
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
+	int (*pfunc)(va_list, flags_t *);
 
-	va_start(vl, format);
-	i = 0;
-	while (format[i])
+	register int count = 0;
+
+	va_start(arguments, format);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = format; *p; p++)
 	{
-		if (format[i] == '%')
+		if (*p == '%')
 		{
-			i++;
-			switch (format[i])
+			p++;
+			if (*p == '%')
 			{
-				case 'c':
-					cc += _printch(va_arg(vl, int));
-					break;
-				case 's':
-					cc += _printstr(va_arg(vl, char *));
-					break;
-				case '%':
-					cc += _printch('%');
-					break;
-				default:
-					cc += _printch('%');
-					cc += _printch(format[i]);
-					break;
+				count += _putchar('%');
+				continue;
 			}
-			i++;
-		}
-		else
-		{
-			cc += _printch(format[i]);
-			i++;
-		}
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print(*p);
+			count += (pfunc)
+				? pfunc(arguments, &flags)
+				: _printf("%%%c", *p);
+		} else
+			count += _putchar(*p);
 	}
-	va_end(vl);
-	return (cc);
+	_putchar(-1);
+	va_end(arguments);
+	return (count);
 }

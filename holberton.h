@@ -31,11 +31,12 @@ typedef struct printHandler
 	char c;
 	int (*f)(va_list ap, flags_t *f);
 } ph;
+/*print characters n strings*/
+int print_string(va_list l, flags_t *f);
+int print_char(va_list l, flags_t *f);
 
 int _printf(const char *format, ...);
-int _printch(char c);
-int _strlen(char *s);
-int _printstr(char *str);
+int (*get_print(char s))(va_list, flags_t *);
 
 /*print_nums*/
 int print_int(va_list l, flags_t *f);
